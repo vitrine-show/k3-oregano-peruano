@@ -200,16 +200,17 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.8);
+            padding: 20px;
         }
 
         .modal-content {
             background-color: #fefefe;
-            margin: 5% auto;
-            padding: 30px;
+            margin: 3% auto;
+            padding: 20px;
             border-radius: 10px;
             width: 90%;
-            max-width: 600px;
+            max-width: 800px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             position: relative;
         }
@@ -217,16 +218,26 @@
         .close-modal {
             color: #aaa;
             float: right;
-            font-size: 28px;
+            font-size: 35px;
             font-weight: bold;
             cursor: pointer;
             position: absolute;
-            right: 20px;
-            top: 15px;
+            right: 15px;
+            top: 10px;
+            z-index: 1;
+            background-color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
 
         .close-modal:hover {
             color: #000;
+            background-color: #f0f0f0;
         }
 
         .modal h3 {
@@ -234,35 +245,14 @@
             color: #2e4a3d;
             margin-bottom: 20px;
             text-align: center;
+            padding-right: 40px;
         }
 
-        .nutritional-table {
+        .nutritional-image {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        .nutritional-table th, .nutritional-table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-            font-size: 0.95em;
-        }
-
-        .nutritional-table th {
-            background-color: #2e4a3d;
-            color: white;
-        }
-
-        .nutritional-table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .nutritional-table p {
-            font-size: 0.9em;
-            color: #555;
-            padding: 10px 0;
-            text-align: left;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         /* Rodapé */
@@ -288,6 +278,13 @@
             .hero .image-placeholder {
                 height: 300px;
             }
+            .modal-content {
+                margin: 10% auto;
+                padding: 15px;
+            }
+            .modal h3 {
+                font-size: 1.4em;
+            }
         }
 
         @media (max-width: 480px) {
@@ -300,13 +297,17 @@
             .hero .image-placeholder {
                 height: 250px;
             }
-            .nutritional-table th, .nutritional-table td {
-                font-size: 0.85em;
-                padding: 8px;
-            }
             .modal-content {
-                padding: 20px;
-                margin: 10% auto;
+                padding: 10px;
+            }
+            .modal h3 {
+                font-size: 1.2em;
+                padding-right: 35px;
+            }
+            .close-modal {
+                width: 35px;
+                height: 35px;
+                font-size: 28px;
             }
         }
     </style>
@@ -386,30 +387,8 @@
     <div id="nutritionalModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3>INFORMAÇÃO NUTRICIONAL</h3>
-            <table class="nutritional-table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>100g</th>
-                        <th>5g</th>
-                        <th>%VD*</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Valor energético (kcal)</td><td>306</td><td>15,3</td><td>1</td></tr>
-                    <tr><td>Carboidratos (g)</td><td>65</td><td>3,22</td><td>1</td></tr>
-                    <tr><td>Açúcares totais (g)</td><td>-</td><td>-</td><td>-</td></tr>
-                    <tr><td>Açúcares adicionados (g)</td><td>-</td><td>-</td><td>-</td></tr>
-                    <tr><td>Proteínas (g)</td><td>11</td><td>0,55</td><td>1</td></tr>
-                    <tr><td>Gorduras totais (g)</td><td>10</td><td>0,5</td><td>1</td></tr>
-                    <tr><td>Gorduras saturadas (g)</td><td>2,6</td><td>0,13</td><td>1</td></tr>
-                    <tr><td>Gorduras trans (g)</td><td>0</td><td>0</td><td>**</td></tr>
-                    <tr><td>Fibras alimentares (g)</td><td>43</td><td>2,15</td><td>8</td></tr>
-                    <tr><td>Sódio (mg)</td><td>15</td><td>0,75</td><td>0</td></tr>
-                </tbody>
-            </table>
-            <p>*Percentual de valores diários fornecidos pela porção.</p>
+            <h3>Informação Nutricional</h3>
+            <img src="tabela-nutricional.jpg" alt="Tabela Nutricional K3 Orégano Peruano" class="nutritional-image">
         </div>
     </div>
 
