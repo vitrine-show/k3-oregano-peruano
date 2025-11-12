@@ -13,61 +13,162 @@
             background-color: #f4f4f4;
             color: #333;
         }
+
         /* Estilos do cabeçalho */
         header {
             background-color: #2e4a3d;
             color: white;
-            padding: 10px 0;
+            padding: 15px 0;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+
         header .container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas pequenas */
             padding: 0 15px;
         }
-        header .logo-area, header .contact-area {
+
+        header .logo-area {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            justify-content: center; /* Centraliza em mobile */
-            margin: 5px 0;
         }
+
         header .logo-area img {
             height: 40px;
             margin-right: 15px;
         }
-        header a {
+
+        header .logo-area a {
             color: white;
             text-decoration: none;
-            margin: 0 10px;
-            white-space: nowrap; /* Evita que o texto dos links quebre */
+            font-size: 1.1em;
         }
+
+        /* Menu de navegação */
+        header nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        header nav a, header nav button {
+            color: white;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+
+        header nav a:hover, header nav button:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        header nav svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Menu mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            header nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background-color: #2e4a3d;
+                flex-direction: column;
+                width: 100%;
+                padding: 20px 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            header nav.active {
+                display: flex;
+            }
+
+            header nav a, header nav button {
+                width: 100%;
+                justify-content: center;
+                padding: 15px;
+            }
+        }
+
         /* Seção Hero */
         .hero {
             background-color: #f8f8f8;
             padding: 50px 15px;
             text-align: center;
         }
+
         .hero h1 {
             font-size: 3em;
             color: #2e4a3d;
             margin-bottom: 10px;
         }
+
         .hero h2 {
             font-size: 1.8em;
             color: #666;
             margin-bottom: 30px;
         }
+
         .hero img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+
+        /* Placeholder para imagem */
+        .hero .image-placeholder {
+            max-width: 600px;
+            margin: 0 auto;
+            height: 400px;
+            background: linear-gradient(135deg, #2e4a3d 0%, #4a7059 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+        }
+
         /* Seção da História */
         .story {
             padding: 50px 15px;
@@ -76,86 +177,94 @@
             text-align: left;
             line-height: 1.6;
         }
+
         .story p {
             font-size: 1.1em;
             color: #333;
             margin-bottom: 20px;
         }
+
         .story strong {
             font-size: 1.2em;
             color: #2e4a3d;
             font-weight: bold;
         }
-        /* Seção Nutricional */
-        .nutritional-section {
-            background-color: #f0f0f0;
-            padding: 50px 15px;
-            text-align: center;
-        }
-        .nutritional-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        #toggleNutritionalInfo {
-            background-color: #2e4a3d;
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            font-size: 1.2em;
-            cursor: pointer;
+
+        /* Modal da Tabela Nutricional */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
             width: 100%;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
         }
-        #toggleNutritionalInfo::after {
-            content: '▼'; /* Seta para baixo */
-            margin-left: 10px;
-            transition: transform 0.3s ease;
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
         }
-        #toggleNutritionalInfo.active::after {
-            content: '▲'; /* Seta para cima quando ativo */
-            transform: rotate(180deg);
+
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
         }
-        #nutritionalContent {
-            display: none; /* Inicia oculto */
-            padding: 20px;
-            text-align: left; /* Alinha o texto dentro do conteúdo nutricional */
+
+        .close-modal:hover {
+            color: #000;
         }
-        #nutritionalContent h3 {
-            font-size: 1.5em;
+
+        .modal h3 {
+            font-size: 1.8em;
             color: #2e4a3d;
             margin-bottom: 20px;
-            text-align: center; /* Centraliza o título da tabela */
+            text-align: center;
         }
+
         .nutritional-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
         }
+
         .nutritional-table th, .nutritional-table td {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
             text-align: left;
-            font-size: 0.9em;
+            font-size: 0.95em;
         }
+
         .nutritional-table th {
-            background-color: #e0e0e0;
+            background-color: #2e4a3d;
+            color: white;
         }
+
         .nutritional-table tbody tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
         .nutritional-table p {
             font-size: 0.9em;
             color: #555;
             padding: 10px 0;
             text-align: left;
         }
+
         /* Rodapé */
         footer {
             background-color: #2e4a3d;
@@ -163,6 +272,7 @@
             padding: 30px 15px;
             text-align: center;
         }
+
         footer p {
             margin-bottom: 10px;
         }
@@ -175,20 +285,8 @@
             .hero h2 {
                 font-size: 1.5em;
             }
-            header .container {
-                flex-direction: column;
-            }
-            header .logo-area, header .contact-area {
-                width: 100%;
-                justify-content: center;
-                margin-bottom: 10px;
-            }
-            header a {
-                margin: 0 8px;
-            }
-            .story, .nutritional-container {
-                padding-left: 15px;
-                padding-right: 15px;
+            .hero .image-placeholder {
+                height: 300px;
             }
         }
 
@@ -199,19 +297,16 @@
             .hero h2 {
                 font-size: 1.2em;
             }
-            header .logo-area img {
-                height: 30px;
-            }
-            header a {
-                font-size: 0.9em;
-            }
-            #toggleNutritionalInfo {
-                font-size: 1em;
-                padding: 12px 15px;
+            .hero .image-placeholder {
+                height: 250px;
             }
             .nutritional-table th, .nutritional-table td {
-                font-size: 0.8em;
+                font-size: 0.85em;
                 padding: 8px;
+            }
+            .modal-content {
+                padding: 20px;
+                margin: 10% auto;
             }
         }
     </style>
@@ -222,13 +317,45 @@
     <header>
         <div class="container">
             <div class="logo-area">
-                <img src="images/logo-k3.png" alt="Logo K3">
+                <img src="logo-k3.png" alt="Logo K3" onerror="this.style.display='none'">
                 <a href="https://k3pimentas.com.br/">k3pimentas.com.br</a>
             </div>
-            <div class="contact-area">
-                <a href="https://wa.me/5527998277710">(27) 99827-7710</a>
-                <a href="https://www.instagram.com/k3pimentadoreino/">@k3pimentadoreino</a>
-            </div>
+
+            <!-- Menu Toggle para Mobile -->
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Menu de Navegação -->
+            <nav id="mainNav">
+                <button onclick="openModal()" aria-label="Tabela Nutricional">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                    </svg>
+                    <span>Tabela Nutricional</span>
+                </button>
+
+                <a href="https://k3pimentas.com.br/" target="_blank" aria-label="Quem Somos">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/>
+                    </svg>
+                    <span>Quem Somos</span>
+                </a>
+
+                <a href="https://wa.me/5527998277710" target="_blank" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.53 14.27C13.38 14.44 13.24 14.46 13 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.5 11.15 9.61 11 9.73 10.89C9.84 10.78 10 10.6 10.1 10.45C10.23 10.31 10.27 10.2 10.35 10.04C10.43 9.87 10.39 9.73 10.33 9.61C10.27 9.5 9.77 8.26 9.56 7.77C9.36 7.29 9.16 7.35 9 7.34C8.86 7.34 8.7 7.33 8.53 7.33Z"/>
+                    </svg>
+                </a>
+
+                <a href="https://www.instagram.com/k3pimentadoreino/" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/>
+                    </svg>
+                </a>
+            </nav>
         </div>
     </header>
 
@@ -237,7 +364,7 @@
         <div class="container">
             <h1>K3 ORÉGANO PERUANO</h1>
             <h2>O Despertar do Sabor em Suas Mãos</h2>
-            <img src="images/oregano-destaque.jpg" alt="Orégano K3">
+            <img src="oregano-destaque.jpg" alt="Orégano K3" onerror="this.parentElement.innerHTML='<div class=\'image-placeholder\'>🌿 K3 Orégano Peruano</div>'">
         </div>
     </section>
 
@@ -262,41 +389,36 @@
         </p>
     </section>
 
-    <!-- Seção de Informações Nutricionais (com toggle) -->
-    <section class="nutritional-section">
-        <div class="nutritional-container">
-            <button id="toggleNutritionalInfo">
-                Ver Informações Nutricionais
-            </button>
-
-            <div id="nutritionalContent">
-                <h3>INFORMAÇÃO NUTRICIONAL</h3>
-                <table class="nutritional-table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>100g</th>
-                            <th>5g</th>
-                            <th>%VD*</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Valor energético (kcal)</td><td>306</td><td>15,3</td><td>1</td></tr>
-                        <tr><td>Carboidratos (g)</td><td>65</td><td>3,22</td><td>1</td></tr>
-                        <tr><td>Açúcares totais (g)</td><td></td><td></td><td></td></tr>
-                        <tr><td>Açúcares adicionados (g)</td><td></td><td></td><td></td></tr>
-                        <tr><td>Proteínas (g)</td><td>11</td><td>0,55</td><td>1</td></tr>
-                        <tr><td>Gorduras totais (g)</td><td>10</td><td>0,5</td><td>1</td></tr>
-                        <tr><td>Gorduras saturadas (g)</td><td>2,6</td><td>0,13</td><td>1</td></tr>
-                        <tr><td>Gorduras trans (g)</td><td>0</td><td>0</td><td>**</td></tr>
-                        <tr><td>Fibras alimentares (g)</td><td>43</td><td>2,15</td><td>8</td></tr>
-                        <tr><td>Sódio (mg)</td><td>15</td><td>0,75</td><td>0</td></tr>
-                    </tbody>
-                </table>
-                <p>*Percentual de valores diários fornecidos pela porção.</p>
-            </div>
+    <!-- Modal da Tabela Nutricional -->
+    <div id="nutritionalModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>INFORMAÇÃO NUTRICIONAL</h3>
+            <table class="nutritional-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>100g</th>
+                        <th>5g</th>
+                        <th>%VD*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Valor energético (kcal)</td><td>306</td><td>15,3</td><td>1</td></tr>
+                    <tr><td>Carboidratos (g)</td><td>65</td><td>3,22</td><td>1</td></tr>
+                    <tr><td>Açúcares totais (g)</td><td>-</td><td>-</td><td>-</td></tr>
+                    <tr><td>Açúcares adicionados (g)</td><td>-</td><td>-</td><td>-</td></tr>
+                    <tr><td>Proteínas (g)</td><td>11</td><td>0,55</td><td>1</td></tr>
+                    <tr><td>Gorduras totais (g)</td><td>10</td><td>0,5</td><td>1</td></tr>
+                    <tr><td>Gorduras saturadas (g)</td><td>2,6</td><td>0,13</td><td>1</td></tr>
+                    <tr><td>Gorduras trans (g)</td><td>0</td><td>0</td><td>**</td></tr>
+                    <tr><td>Fibras alimentares (g)</td><td>43</td><td>2,15</td><td>8</td></tr>
+                    <tr><td>Sódio (mg)</td><td>15</td><td>0,75</td><td>0</td></tr>
+                </tbody>
+            </table>
+            <p>*Percentual de valores diários fornecidos pela porção.</p>
         </div>
-    </section>
+    </div>
 
     <!-- Rodapé (Footer) -->
     <footer>
@@ -308,19 +430,41 @@
         </div>
     </footer>
 
-    <!-- Script JavaScript para o toggle da tabela nutricional -->
+    <!-- Scripts JavaScript -->
     <script>
-        document.getElementById('toggleNutritionalInfo').addEventListener('click', function() {
-            var content = document.getElementById('nutritionalContent');
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-                this.textContent = 'Esconder Informações Nutricionais';
-                this.classList.add('active');
-            } else {
-                content.style.display = 'none';
-                this.textContent = 'Ver Informações Nutricionais';
-                this.classList.remove('active');
+        // Toggle do menu mobile
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // Abrir modal da tabela nutricional
+        function openModal() {
+            document.getElementById('nutritionalModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fechar modal
+        function closeModal() {
+            document.getElementById('nutritionalModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('nutritionalModal');
+            if (event.target == modal) {
+                closeModal();
             }
+        }
+
+        // Fechar menu mobile ao clicar em um link
+        document.querySelectorAll('#mainNav a, #mainNav button').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    document.getElementById('mainNav').classList.remove('active');
+                }
+            });
         });
     </script>
 
