@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K3 ORÉGANO PERUANO | O Despertar do Sabor em Suas Mãos</title>
+    <style>
+        /* Estilos básicos para o corpo */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        /* Estilos do cabeçalho */
+        header {
+            background-color: #2e4a3d;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas pequenas */
+            padding: 0 15px;
+        }
+        header .logo-area, header .contact-area {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center; /* Centraliza em mobile */
+            margin: 5px 0;
+        }
+        header .logo-area img {
+            height: 40px;
+            margin-right: 15px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            white-space: nowrap; /* Evita que o texto dos links quebre */
+        }
+        /* Seção Hero */
+        .hero {
+            background-color: #f8f8f8;
+            padding: 50px 15px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3em;
+            color: #2e4a3d;
+            margin-bottom: 10px;
+        }
+        .hero h2 {
+            font-size: 1.8em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .hero img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        /* Seção da História */
+        .story {
+            padding: 50px 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .story p {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .story strong {
+            font-size: 1.2em;
+            color: #2e4a3d;
+            font-weight: bold;
+        }
+        /* Seção Nutricional */
+        .nutritional-section {
+            background-color: #f0f0f0;
+            padding: 50px 15px;
+            text-align: center;
+        }
+        .nutritional-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        #toggleNutritionalInfo {
+            background-color: #2e4a3d;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #toggleNutritionalInfo::after {
+            content: '▼'; /* Seta para baixo */
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        #toggleNutritionalInfo.active::after {
+            content: '▲'; /* Seta para cima quando ativo */
+            transform: rotate(180deg);
+        }
+        #nutritionalContent {
+            display: none; /* Inicia oculto */
+            padding: 20px;
+            text-align: left; /* Alinha o texto dentro do conteúdo nutricional */
+        }
+        #nutritionalContent h3 {
+            font-size: 1.5em;
+            color: #2e4a3d;
+            margin-bottom: 20px;
+            text-align: center; /* Centraliza o título da tabela */
+        }
+        .nutritional-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .nutritional-table th, .nutritional-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        .nutritional-table th {
+            background-color: #e0e0e0;
+        }
+        .nutritional-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .nutritional-table p {
+            font-size: 0.9em;
+            color: #555;
+            padding: 10px 0;
+            text-align: left;
+        }
+        /* Rodapé */
+        footer {
+            background-color: #2e4a3d;
+            color: white;
+            padding: 30px 15px;
+            text-align: center;
+        }
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Media Queries para Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero h2 {
+                font-size: 1.5em;
+            }
+            header .container {
+                flex-direction: column;
+            }
+            header .logo-area, header .contact-area {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+            header a {
+                margin: 0 8px;
+            }
+            .story, .nutritional-container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero h2 {
+                font-size: 1.2em;
+            }
+            header .logo-area img {
+                height: 30px;
+            }
+            header a {
+                font-size: 0.9em;
+            }
+            #toggleNutritionalInfo {
+                font-size: 1em;
+                padding: 12px 15px;
+            }
+            .nutritional-table th, .nutritional-table td {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho (Header) -->
+    <header>
+        <div class="container">
+            <div class="logo-area">
+                <img src="images/logo-k3.png" alt="Logo K3">
+                <a href="https://k3pimentas.com.br/">k3pimentas.com.br</a>
+            </div>
+            <div class="contact-area">
+                <a href="https://wa.me/5527998277710">(27) 99827-7710</a>
+                <a href="https://www.instagram.com/k3pimentadoreino/">@k3pimentadoreino</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção Hero/Destaque -->
+    <section class="hero">
+        <div class="container">
+            <h1>K3 ORÉGANO PERUANO</h1>
+            <h2>O Despertar do Sabor em Suas Mãos</h2>
+            <img src="images/oregano-destaque.jpg" alt="Orégano K3">
+        </div>
+    </section>
+
+    <!-- Seção da História -->
+    <section class="story">
+        <p>
+            Pouca gente sabe, mas o orégano "acorda" com o toque.
+            Quando você esfrega entre os dedos, o calor desperta o aroma escondido nas folhas — e, por um instante, o ar muda.
+            É ali que o sabor nasce.
+            Antes da panela, antes do fogo.
+            Na ponta dos seus dedos.
+        </p>
+        <p>
+            Na K3, a gente acredita nesse tipo de detalhe.
+            O que parece pequeno — o tempo de secagem, o cuidado na colheita, o jeito de guardar cada folha —
+            é o que transforma o simples em extraordinário.
+            Porque o sabor não vem só da natureza.
+            Vem de quem respeita o tempo dela.
+        </p>
+        <p>
+            <strong>K3 — há mais de 8 anos fazendo do tempo o melhor tempero</strong>
+        </p>
+    </section>
+
+    <!-- Seção de Informações Nutricionais (com toggle) -->
+    <section class="nutritional-section">
+        <div class="nutritional-container">
+            <button id="toggleNutritionalInfo">
+                Ver Informações Nutricionais
+            </button>
+
+            <div id="nutritionalContent">
+                <h3>INFORMAÇÃO NUTRICIONAL</h3>
+                <table class="nutritional-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>100g</th>
+                            <th>5g</th>
+                            <th>%VD*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Valor energético (kcal)</td><td>306</td><td>15,3</td><td>1</td></tr>
+                        <tr><td>Carboidratos (g)</td><td>65</td><td>3,22</td><td>1</td></tr>
+                        <tr><td>Açúcares totais (g)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Açúcares adicionados (g)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Proteínas (g)</td><td>11</td><td>0,55</td><td>1</td></tr>
+                        <tr><td>Gorduras totais (g)</td><td>10</td><td>0,5</td><td>1</td></tr>
+                        <tr><td>Gorduras saturadas (g)</td><td>2,6</td><td>0,13</td><td>1</td></tr>
+                        <tr><td>Gorduras trans (g)</td><td>0</td><td>0</td><td>**</td></tr>
+                        <tr><td>Fibras alimentares (g)</td><td>43</td><td>2,15</td><td>8</td></tr>
+                        <tr><td>Sódio (mg)</td><td>15</td><td>0,75</td><td>0</td></tr>
+                    </tbody>
+                </table>
+                <p>*Percentual de valores diários fornecidos pela porção.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé (Footer) -->
+    <footer>
+        <div class="container">
+            <p>
+                Rua Santa Catarina, 181 – Santa Terezinha, São Gabriel da Palha – ES
+            </p>
+            <p>Indústria Brasileira</p>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript para o toggle da tabela nutricional -->
+    <script>
+        document.getElementById('toggleNutritionalInfo').addEventListener('click', function() {
+            var content = document.getElementById('nutritionalContent');
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                this.textContent = 'Esconder Informações Nutricionais';
+                this.classList.add('active');
+            } else {
+                content.style.display = 'none';
+                this.textContent = 'Ver Informações Nutricionais';
+                this.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
